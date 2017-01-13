@@ -5,8 +5,9 @@
 
 # SW Helpers
 
-## The Libraries
-### sw-appcache-behavior
+TODO: Add introduction to the repo.
+
+## sw-appcache-behavior
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-appcache-behavior%22)][travis-url]
 
@@ -18,7 +19,7 @@ A service worker implementation of the behavior defined in a page&#x27;s App Cac
                 [Demo](packages/sw-appcache-behavior#demo) •
                 [API](packages/sw-appcache-behavior#api)
 
-### sw-background-sync-queue
+## sw-background-sync-queue
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-background-sync-queue%22)][travis-url]
 
@@ -30,7 +31,7 @@ A service worker implementation of the a queue which is triggered by the backgro
                 [Demo](packages/sw-background-sync-queue#demo) •
                 [API](packages/sw-background-sync-queue#api)
 
-### sw-broadcast-cache-update
+## sw-broadcast-cache-update
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-broadcast-cache-update%22)][travis-url]
 
@@ -42,7 +43,7 @@ A helper library that uses the Broadcast Channel API to announce when two Respon
                 [Demo](packages/sw-broadcast-cache-update#demo) •
                 [API](packages/sw-broadcast-cache-update#api)
 
-### sw-cache-expiration
+## sw-cache-expiration
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-cache-expiration%22)][travis-url]
 
@@ -54,11 +55,11 @@ This library is still a work in progress and is not functional.
                 [Demo](packages/sw-cache-expiration#demo) •
                 [API](packages/sw-cache-expiration#api)
 
-### sw-cacheable-response-behavior
+## sw-cacheable-response-behavior
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-cacheable-response-behavior%22)][travis-url]
 
-This library takes a Response object and  determines whether it&#x27;s cacheable, based on a specific configuration.
+This library takes a Response object and determines whether it&#x27;s cacheable, based on a specific configuration.
 
 **Install**: `npm install --save-dev sw-cacheable-response-behavior`
 
@@ -66,19 +67,19 @@ This library takes a Response object and  determines whether it&#x27;s cacheable
                 [Demo](packages/sw-cacheable-response-behavior#demo) •
                 [API](packages/sw-cacheable-response-behavior#api)
 
-### sw-lib
+## sw-cli
 
-[![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-lib%22)][travis-url]
+[![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-cli%22)][travis-url]
 
 A CLI tool to generate a service worker and file manifest making use of the sw-lib module.
 
-**Install**: `npm install --save-dev sw-lib`
+**Install**: `npm install --save-dev sw-cli`
 
-**Learn More**: [About](packages/sw-lib) •
-                [Demo](packages/sw-lib#demo) •
-                [API](packages/sw-lib#api)
+**Learn More**: [About](packages/sw-cli) •
+                [Demo](packages/sw-cli#demo) •
+                [API](packages/sw-cli#api)
 
-### sw-lib
+## sw-lib
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-lib%22)][travis-url]
 
@@ -90,7 +91,7 @@ A service worker library to make managing fetch requests and caching as easy as 
                 [Demo](packages/sw-lib#demo) •
                 [API](packages/sw-lib#api)
 
-### sw-offline-google-analytics
+## sw-offline-google-analytics
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-offline-google-analytics%22)][travis-url]
 
@@ -102,7 +103,7 @@ A service worker helper library to retry offline Google Analytics requests when 
                 [Demo](packages/sw-offline-google-analytics#demo) •
                 [API](packages/sw-offline-google-analytics#api)
 
-### sw-precaching
+## sw-precaching
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-precaching%22)][travis-url]
 
@@ -114,7 +115,7 @@ This library is still a work in progress and is not functional.
                 [Demo](packages/sw-precaching#demo) •
                 [API](packages/sw-precaching#api)
 
-### sw-routing
+## sw-routing
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-routing%22)][travis-url]
 
@@ -126,7 +127,7 @@ A service worker helper library to route request URLs to handlers.
                 [Demo](packages/sw-routing#demo) •
                 [API](packages/sw-routing#api)
 
-### sw-runtime-caching
+## sw-runtime-caching
 
 [![Build Status](https://travis-shields.appspot.com/shield/GoogleChrome/sw-helpers/master/PROJECT%3D%22sw-runtime-caching%22)][travis-url]
 
@@ -139,10 +140,10 @@ A service worker helper library that implements various runtime caching strategi
                 [API](packages/sw-runtime-caching#api)
 
 
-## External Contributions
+## Become a Contributor
 
-Please read the [guide to contributing](CONTRIBUTING.md) prior to filing any
-pull requests.
+Please read this [guide to contributing](https://googlechrome.github.io/sw-helpers/contributing/)
+prior to filing any pull requests.
 
 ## License
 
@@ -165,6 +166,6 @@ limitations under the License.
 [travis-url]: https://travis-ci.org/GoogleChrome/sw-helpers
 [travis-image]: https://travis-ci.org/GoogleChrome/sw-helpers.svg?branch=master
 [dependency-url]: https://david-dm.org/GoogleChrome/sw-helpers/
-[dependency-image]: https://david-dm.org/GoogleChrome/sw-helpers/status.svg
+[dependency-image]: https://david-dm.org/GoogleChrome/sw-helpers/dev-status.svg
 [dev-dependency-url]: https://david-dm.org/GoogleChrome/sw-helpers?type=dev
-[dev-dependency-image]: https://david-dm.org/GoogleChrome/sw-helpers/dev-status.svg
+[dev-dependency-image]: https://david-dm.org/GoogleChrome/sw-helpers/status.svg

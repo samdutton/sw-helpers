@@ -14,10 +14,12 @@
 */
 
 const pkg = require('./package.json');
-const {buildJSBundle, generateBuildConfigs} = require('../../build-utils');
+const {jsBundleRunner, generateBuildConfigs} = require('../../build-utils');
 
 const buildConfigs = generateBuildConfigs({
   umd: pkg.main,
 }, __dirname, 'goog.swlib');
 
-module.exports = () => Promise.all(buildConfigs.map(buildJSBundle));
+module.exports = () => {
+  return jsBundleRunner(buildConfigs);
+};

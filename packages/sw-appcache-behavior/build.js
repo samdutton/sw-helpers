@@ -16,42 +16,44 @@
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const path = require('path');
-const {buildJSBundle} = require('../../build-utils');
+const {jsBundleRunner} = require('../../build-utils');
+
+const buildConfigs = [
+  {
+    rollupConfig: {
+      entry: path.join(__dirname, 'src', 'client-runtime.js'),
+      format: 'umd',
+      plugins: [
+        resolve({
+          jsnext: true,
+          main: true,
+          browser: true,
+        }),
+        commonjs(),
+      ],
+    },
+    buildPath: 'build/client-runtime.js',
+    projectDir: __dirname,
+  },
+  {
+    rollupConfig: {
+      entry: path.join(__dirname, 'src', 'appcache-behavior-import.js'),
+      format: 'umd',
+      moduleName: 'goog.appCacheBehavior',
+      plugins: [
+        resolve({
+          jsnext: true,
+          main: true,
+          browser: true,
+        }),
+        commonjs(),
+      ],
+    },
+    buildPath: 'build/appcache-behavior-import.js',
+    projectDir: __dirname,
+  },
+];
 
 module.exports = () => {
-  return Promise.all([
-    buildJSBundle({
-      rollupConfig: {
-        entry: path.join(__dirname, 'src', 'client-runtime.js'),
-        format: 'umd',
-        plugins: [
-          resolve({
-            jsnext: true,
-            main: true,
-            browser: true,
-          }),
-          commonjs(),
-        ],
-      },
-      buildPath: 'build/client-runtime.js',
-      projectDir: __dirname,
-    }),
-    buildJSBundle({
-      rollupConfig: {
-        entry: path.join(__dirname, 'src', 'appcache-behavior-import.js'),
-        format: 'umd',
-        moduleName: 'goog.appCacheBehavior',
-        plugins: [
-          resolve({
-            jsnext: true,
-            main: true,
-            browser: true,
-          }),
-          commonjs(),
-        ],
-      },
-      buildPath: 'build/appcache-behavior-import.js',
-      projectDir: __dirname,
-    }),
-  ]);
+  return jsBundleRunner(buildConfigs);
 };

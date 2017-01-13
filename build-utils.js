@@ -34,6 +34,19 @@ const globPromise = promisify('glob');
 
 const LICENSE_HEADER = fs.readFileSync('LICENSE-HEADER', 'utf8');
 
+const PLUGINS = [
+  rollupBabel({
+    plugins: ['transform-async-to-generator', 'external-helpers'],
+    exclude: 'node_modules/**',
+  }),
+  resolve({
+    jsnext: true,
+    main: true,
+    browser: true,
+  }),
+  commonjs(),
+];
+
 /**
  * Wrapper on top of childProcess.spawn() that returns a promise which rejects
  * when the child process has a non-zero exit code and resolves otherwise.
@@ -70,6 +83,7 @@ function taskPromiseWrapper(projects, task, args) {
   let rejected = [];
   return projects.reduce((promiseChain, project) => {
     return promiseChain.then(() => {
+      console.log(`Running '${project}' ------------------------`);
       return task(path.join(__dirname, path.dirname(project)), args)
       .catch((error) => {
         rejected.push(error);
@@ -140,24 +154,11 @@ function buildJSBundle(options) {
  * @returns {Array.<Object>}
  */
 function generateBuildConfigs(formatToPath, projectDir, moduleName) {
-  const plugins = [
-    rollupBabel({
-      plugins: ['transform-async-to-generator', 'external-helpers'],
-      exclude: 'node_modules/**',
-    }),
-    resolve({
-      jsnext: true,
-      main: true,
-      browser: true,
-    }),
-    commonjs(),
-  ];
-
   // This is shared throughout the full permutation of build configs.
   const baseConfig = {
     rollupConfig: {
       entry: path.join(projectDir, 'src', 'index.js'),
-      plugins,
+      plugins: PLUGINS,
       moduleName,
     },
     projectDir,
@@ -190,8 +191,31 @@ function generateBuildConfigs(formatToPath, projectDir, moduleName) {
   }, []);
 }
 
+function runBundleStep(index, bundleDetails, done) {
+  if (index >= bundleDetails.length) {
+    return done();
+  }
+
+  buildJSBundle(bundleDetails[index])
+  .then(function() {
+    runBundleStep(index + 1, bundleDetails, done);
+  });
+}
+
+/**
+ * This forces any build task to run the builds a fixed way to avoid
+ * out of memory warnings from Node.
+ * @param  {[type]} bundleDetails [description]
+ * @return {[type]}               [description]
+ */
+function jsBundleRunner(bundleDetails) {
+  return new Promise((resolve) => {
+    runBundleStep(0, bundleDetails, resolve);
+  });
+}
+
 module.exports = {
-  buildJSBundle,
+  jsBundleRunner,
   generateBuildConfigs,
   globPromise,
   processPromiseWrapper,

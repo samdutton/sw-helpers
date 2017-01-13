@@ -16,12 +16,8 @@
 const gulp = require('gulp');
 const rename = require('gulp-rename');
 const handlebars = require('gulp-compile-handlebars');
-const path = require('path');
-const promisify = require('promisify-node');
-const {globPromise, processPromiseWrapper, taskHarness} =
+const {globPromise, taskHarness} =
   require('../build-utils');
-
-const tmpPromise = promisify('tmp');
 
 /**
  * Documents a given project.
@@ -42,14 +38,6 @@ const documentPackage = (projectPath) => {
       .pipe(rename('README.md'))
       .pipe(gulp.dest(projectPath))
       .on('end', resolve);
-  }).then(() => {
-    // Then use the inline JSDoc to populate the "API" section.
-    return globPromise(`${projectPath}/src/**/*.js`).then((files) => {
-      const args = ['readme', ...files, '--github', '--section', 'API',
-        '--readme-file', `${projectPath}/README.md`];
-      return processPromiseWrapper(
-        path.join('node_modules', '.bin', 'documentation'), args);
-    });
   });
 };
 
@@ -57,7 +45,7 @@ gulp.task('documentation:projects', () => {
   return taskHarness(documentPackage, global.projectOrStar);
 });
 
-gulp.task('documentation:repo', ['build'], () => {
+gulp.task('documentation:repo', () => {
   if (global.projectOrStar !== '*') {
     throw Error('Please do not use --project= with documentation:repo.');
   }
@@ -79,16 +67,16 @@ gulp.task('documentation:repo', ['build'], () => {
     // versions of Node, triggering a bug in selenium-webdriver (sigh).
     // To work around this, only pull in gh-pages when it's needed, rather than
     // globally at the top of this file.
-    const ghPagesPromise = promisify('gh-pages');
+    // const ghPagesPromise = promisify('gh-pages');
 
     // Then publish all of the build + demo files to gh-pages.
-    return tmpPromise.dir().then((tmpDir) => {
+    /** return tmpPromise.dir().then((tmpDir) => {
       return new Promise((resolve) => {
-        gulp.src('packages/*/{build,demo}/**')
+        gulp.src('packages/*//** {build,demo}/**')
           .pipe(gulp.dest(tmpDir))
           .on('end', resolve);
       }).then(() => ghPagesPromise.publish(tmpDir));
-    });
+    });**/
   });
 });
 

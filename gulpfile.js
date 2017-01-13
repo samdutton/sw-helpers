@@ -31,5 +31,5 @@ require('./gulp-tasks/documentation.js');
 require('./gulp-tasks/serve.js');
 
 gulp.task('default', (callback) => {
-  runSequence(['lint', 'test'], 'documentation', callback);
+  runSequence(['test'], 'documentation', callback);
 });
