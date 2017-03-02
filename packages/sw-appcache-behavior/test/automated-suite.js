@@ -30,11 +30,6 @@ const seleniumAssistant = require('selenium-assistant');
 const fs = require('fs');
 const testServer = require('../../../utils/test-server');
 
-// Ensure the selenium drivers are added Node scripts path.
-require('geckodriver');
-require('chromedriver');
-require('operadriver');
-
 const fsePromise = promisify('fs-extra');
 
 const expect = chai.expect;
@@ -274,21 +269,9 @@ const configureTestSuite = function(browser) {
 };
 
 seleniumAssistant.getLocalBrowsers().forEach(function(browser) {
-  // Blackliist browsers here if needed.
-  if (browser.getId() === 'opera' && browser.getVersionNumber() === 41) {
-    console.warn('Skipping Opera version 41 due to operadriver error.');
-    return;
-  }
-
   switch (browser.getId()) {
     case 'chrome':
     case 'firefox':
-    case 'opera':
-      if (browser.getId() === 'opera' &&
-        browser.getVersionNumber() <= 43) {
-        console.log(`Skipping Opera <= 43 due to driver issues.`);
-        return;
-      }
       configureTestSuite(browser);
       break;
     default:

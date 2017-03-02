@@ -22,7 +22,7 @@
  * There are two servers so tests can make requests to a foreign origin.
  */
 
-/* eslint-disable valid-jsdoc */
+/* eslint-disable valid-jsdoc, no-console */
 
 const ServerInstance = require('./server-instance');
 
@@ -61,6 +61,8 @@ module.exports = {
               'ports or primaryPort and primaryPort + 1.'));
           });
         } else {
+          console.log('Primary Port: ', primaryPort);
+          console.log('Secondary Port: ', actualSecondaryPort);
           return primaryPort;
         }
       });

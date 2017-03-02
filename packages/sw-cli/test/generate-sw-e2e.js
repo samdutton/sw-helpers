@@ -23,7 +23,7 @@ describe('Generate SW End-to-End Tests', function() {
     return testServer.stop();
   });
 
-  beforeEach(() => {
+  before(() => {
     tmpDirectory = fs.mkdtempSync(
       path.join(__dirname, 'tmp-')
     );
